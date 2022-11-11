@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>CLOCK</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        background-color: lightblue;
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        color: white;
+      }
+
+      .box {
+        width: 100px;
+        background-color: lightpink;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10%;
+        margin-right: 50px;
+        letter-spacing: 3px;
+        font-size: 25px;
+      }
+      .box span:last-child {
+        margin-top: 5px;
+        font-size: 10px;
+      }
+      #ampm {
+        background-color: lightgreen;
+        padding: 20px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"><span id="hour">00</span> <span>hours</span></div>
+    <div class="box"><span id="minute">00</span> <span>minutes</span></div>
+    <div class="box"><span id="second">00</span> <span>seconds</span></div>
+    <span id="ampm">AM</span>
+    <script>
+      const hourEl = document.getElementById("hour");
+      const minuteEl = document.getElementById("minute");
+      const secondEl = document.getElementById("second");
+      const ampmdEl = document.getElementById("ampm");
+
+      function updateClock() {
+        let h = new Date().getHours();
+        let m = new Date().getMinutes();
+        let s = new Date().getSeconds();
+        let ampm = "AM";
+        if (h > 12) {
+          h = h - 12;
+          ampm = "PM";
+        }
+        h = h < 10 ? "0" + h : h;
+        m = m < 10 ? "0" + m : m;
+        s = s < 10 ? "0" + s : s;
+
+        hourEl.innerText = h;
+        minuteEl.innerText = m;
+        secondEl.innerText = s;
+        ampmdEl.innerText = ampm;
+
+        setTimeout(() => {
+          updateClock();
+        }, 1000);
+      }
+      updateClock();
+    </script>
+  </body>
+</html>
